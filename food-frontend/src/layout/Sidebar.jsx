@@ -2,16 +2,8 @@ import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   return (
-    <div className="relative flex min-h-[740px] w-60 max-w-[20rem] flex-col bg-[#F1F2F7] p-4 shadow-sm">
-      <div className="p-4 mb-2 flex items-center">
-        
-          
-        <div className="grid mr-4">
-              <span className="bg-[#5A67BA] rounded-3xl w-[25px] text-white font-600 text-center">G</span>
-            </div>
-            <span className="block font-sans text-xl text-[#5A67BA] text-900 text-[11px] leading-[11px] font-bold">Food CRUD
-        </span>
-      </div>
+    <div className="relative flex min-h-[740px] w-1/5 flex-col bg-[#F1F2F7] p-4 shadow-sm">
+      
       <nav className="flex min-w-[240px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
         <Link
           to="/"

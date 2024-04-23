@@ -1,23 +1,16 @@
 import { useState } from "react";
 import Layout from "../layout/Layout";
-import { NewItem } from "../apiRequest/api"
 
-const CreateItem = () => {
+const UpdateItem = () => {
   const [input, setInput] = useState({});
 
   const FormInput = (e) => {
-    setInput((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value 
-    }));
+    console.log(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Input : ", input);
-    NewItem(input).then(res => {
-      console.log(res);
-    });
   };
 
   return (
@@ -128,4 +121,4 @@ const CreateItem = () => {
   );
 };
 
-export default CreateItem;
+export default UpdateItem;

@@ -1,12 +1,16 @@
-import React from 'react'
-import Layout from '../layout/Layout'
+import React from "react";
+import Layout from "../layout/Layout";
+import Card from "../components/ItemCard";
 
 const AllFood = () => {
+  const data = [];
   return (
     <Layout>
-        <div>AllFood</div>
+      <div>
+        <Card data={data} />
+      </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default AllFood
+export default AllFood;

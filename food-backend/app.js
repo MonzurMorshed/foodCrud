@@ -56,15 +56,15 @@ mongoose.connect(URI, OPTION).then(
 app.use('/api/v1',router);
 
 // Undefined Route
-app.use('*',(req,res) => {
-    res.status(404).json({
-        status: 'fail',
-        data:'not found'
-    })
-})
+// app.use('*',(req,res) => {
+//     res.status(404).json({
+//         status: 'fail',
+//         data:'not found'
+//     })
+// })
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'https://food-crud-eight.vercel.app');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });

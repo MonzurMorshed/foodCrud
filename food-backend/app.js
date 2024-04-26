@@ -31,7 +31,7 @@ const limiter = rateLimit({windowMs:15*60*1000,max:3000});
 app.use(limiter);
 
 // Mongo DB Connection
-let URI = "mongodb://localhost:27017/Item"
+let URI = "mongodb+srv://monzurmorshedcse:GIbq7VXAzvT3CYJ3@cluster0.mhpu0na.mongodb.net/Item";
 let OPTION = {
     user:'',
     pass:'',
@@ -40,7 +40,7 @@ let OPTION = {
 
 mongoose.connect(URI, OPTION).then(
     () => { console.log('Connection established successfully.'); },
-    err => { console.log('Something went wrong.'); }
+    err => { console.log('Something went wrong.', err); }
   );
 
 // Routing Implement

@@ -2,15 +2,18 @@ const jwt = require("jsonwebtoken");
 const ItemListModel = require("../models/ItemListModel");
 
 exports.CreateItem = (req,res) => {
+
+    console.log('req : ',req);
+
     let reqBody = req.body;
 
     let PostBody = {
-        Name: req.body['name'],
-        Code: req.body['code'],
-        Image: req.body['image'],
-        Category: req.body['category'],
-        Quantity: req.body['Qty'],
-        Price: req.body['price'],
+        Name: req.body.input['name'],
+        Code: req.body.input['code'],
+        Image: req.body.input['image'],
+        Category: req.body.input['category'],
+        Quantity: req.body.input['qty'],
+        Price: req.body.input['price'],
         ItemCreateDate: Date.now(),
         ItemUpdateDate: Date.now()
     };
@@ -27,9 +30,20 @@ exports.CreateItem = (req,res) => {
 
 exports.SelectItem = (req,res) => {
 
-    let id = req.headers['id'];
+    ItemListModel.find().then(
+        (data) => { 
+            return res.status(200).json({status:'success',data:data});  
+        },
+        (err) => { 
+            return res.status(400).json({status:'fail',data:err});
+        }
+    );
+}
+
+exports.GetItem = (req,res) => {
+
     ItemListModel.find({
-        _id: id
+        _id: req.body['id']
     }).then(
         (data) => { 
             return res.status(200).json({status:'success',data:data});  
@@ -44,15 +58,15 @@ exports.UpdateItem = (req,res) => {
 
     let reqBody = req.body;
 
-    let _id = reqBody['_id'];
+    let _id = reqBody.input['_id'];
 
     let PostBody = {
-        Name: req.body['name'],
-        Code: req.body['code'],
-        Image: req.body['image'],
-        Category: req.body['category'],
-        Quantity: req.body['Qty'],
-        Price: req.body['price'],
+        Name: req.body.input['name'],
+        Code: req.body.input['code'],
+        Image: req.body.input['image'],
+        Category: req.body.input['category'],
+        Quantity: req.body.input['qty'],
+        Price: req.body.input['price'],
         ItemUpdateDate: Date.now()
     };
 
@@ -68,7 +82,9 @@ exports.UpdateItem = (req,res) => {
 
 exports.RemoveItem = (req,res) => {
 
-    let _id = req.body['_id'];
+    let _id = req.body['id'];
+
+    console.log(_id);
 
     ItemListModel.deleteOne({_id:_id}).then(
         (data) => { 

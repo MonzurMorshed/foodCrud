@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Layout from "../layout/Layout";
 import { NewItem } from "../apiRequest/api"
+import { redirect } from "react-router-dom";
 
 const CreateItem = () => {
   const [input, setInput] = useState({});
@@ -12,11 +13,11 @@ const CreateItem = () => {
     }));
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Input : ", input);
     NewItem(input).then(res => {
-      console.log(res);
+      if(res?.status === 200) return redirect("/allItem");
     });
   };
 

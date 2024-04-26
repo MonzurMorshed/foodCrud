@@ -1,22 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
+import { Navigate, redirect, unstable_HistoryRouter, useParams } from "react-router-dom";
+import { EditItem, GetItem } from "../apiRequest/api";
+import toast from "react-hot-toast";
 
 const UpdateItem = () => {
-  const [input, setInput] = useState({});
 
-  const FormInput = (e) => {
-    console.log(e.target.value);
-  };
+  const [item,setItem] = useState({
+    name: '',
+    code: '',
+    image: '',
+    category: '',
+    qty: '',
+    price: ''
+  });
+
+  const params = useParams();
+
+  useEffect(() => {
+    GetItem(params?.id).then(res => {
+      console.log(typeof res?.data[0]);
+      
+      setItem({
+        name: res?.data[0]?.Name,
+        code: res?.data[0]?.Code,
+        image: res?.data[0]?.Image,
+        category: res?.data[0]?.Category,
+        qty: res?.data[0]?.Quantity,
+        price: res?.data[0]?.Price
+      })
+    })
+  },[params?.id])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Input : ", input);
+    Object.assign(item,{
+      _id: params?.id
+    });
+
+    EditItem(item).then(res => {
+      toast.success('Item update successfully.');
+      // Navigate('/allItem');
+    });
   };
 
   return (
     <Layout>
       <div>
-        <h1>Create Food Item</h1>
+        <h1>Update Food Item</h1>
         <div>
           <form onSubmit={handleSubmit} className="">
             <div className="grid grid-rows-1 grid-flow-col gap-4">
@@ -29,7 +60,8 @@ const UpdateItem = () => {
                     name="name"
                     className="input input-bordered w-full max-w-xs"
                     type="text"
-                    onChange={(e) => FormInput(e)}
+                    onChange={(e) => setItem({...item, name: e.target.value})}
+                    value={item?.name}
                     required
                   />
                 </label>
@@ -43,7 +75,8 @@ const UpdateItem = () => {
                     name="code"
                     className="input input-bordered w-full max-w-xs"
                     type="text"
-                    onChange={(e) => FormInput(e)}
+                    onChange={(e) => setItem({...item, Code: e.target.value})}
+                    value={item?.code}
                     required
                   />
                 </label>
@@ -57,7 +90,8 @@ const UpdateItem = () => {
                     name="image"
                     className="input input-bordered w-full max-w-xs"
                     type="text"
-                    onChange={(e) => FormInput(e)}
+                    onChange={(e) => setItem({...item, image: e.target.value})}
+                    value={item?.image}
                     required
                   />
                 </label>
@@ -74,7 +108,8 @@ const UpdateItem = () => {
                     name="category"
                     className="input input-bordered w-full max-w-xs"
                     type="text"
-                    onChange={(e) => FormInput(e)}
+                    onChange={(e) => setItem({...item, category: e.target.value})}
+                    value={item?.category}
                     required
                   />
                 </label>
@@ -88,7 +123,8 @@ const UpdateItem = () => {
                     name="qty"
                     className="input input-bordered w-full max-w-xs"
                     type="number"
-                    onChange={(e) => FormInput(e)}
+                    onChange={(e) => setItem({...item, qty: e.target.value})}
+                    value={item?.qty}
                     required
                   />
                 </label>
@@ -102,7 +138,8 @@ const UpdateItem = () => {
                     name="price"
                     className="input input-bordered w-full max-w-xs"
                     type="number"
-                    onChange={(e) => FormInput(e)}
+                    onChange={(e) => setItem({...item, price: e.target.value})}
+                    value={item?.price}
                     required
                   />
                 </label>

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const BaseURL = "localhost:5000/api";
+const BaseURL = "http://localhost:5000/api/v1";
 
 const header = {
     'content-type': 'application/json'
-}
+};
 
 export async function NewItem(input) {
     let res = await axios.post(BaseURL+'/CreateItem',{input},{headers:header});
@@ -13,10 +13,10 @@ export async function NewItem(input) {
     } else {
         return [];
     }
-}
+};
 
-export async function postLatest() {
-    let res = await axios.get(BaseURL+'/post-newest');
+export async function AllItem() {
+    let res = await axios.post(BaseURL+'/SelectItem',{headers:header});
     if(res.status === 200) {
         return res.data;
     } else {
@@ -24,8 +24,8 @@ export async function postLatest() {
     }
 }
 
-export async function postCategory(id) {
-    let res = await axios.get(BaseURL+'/post-list/'+id);
+export async function GetItem(id) {
+    let res = await axios.post(BaseURL+'/GetItem',{id: id},{headers:header});
     if(res.status === 200) {
         return res.data;
     } else {
@@ -33,8 +33,19 @@ export async function postCategory(id) {
     }
 }
 
-export async function postDetails(id) {
-    let res = await axios.get(BaseURL+'/post-details/'+id);
+
+export async function EditItem(input) {
+    console.log(input);
+    let res = await axios.post(BaseURL+'/UpdateItem/',{input},{headers:header});
+    if(res.status === 200) {
+        return res.data;
+    } else {
+        return [];
+    }
+}
+
+export async function DeleteItem(id) {
+    let res = await axios.post(BaseURL+'/RemoveItem/',{id},{headers:header});
     if(res.status === 200) {
         return res.data;
     } else {

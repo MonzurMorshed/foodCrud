@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BaseURL = "http://localhost:5000/api/v1";
+// const BaseURL = "http://localhost:5000/api/v1";
+const BaseURL = "food-crud-8lkg.vercel.app/api/v1";
 
 const header = {
     'content-type': 'application/json'

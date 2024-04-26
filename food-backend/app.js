@@ -17,7 +17,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 // Security Middleware Implement
-app.use(cors());
+
+const corsOptions = {
+    credentials: true,
+    origin: ['https://food-crud-eight.vercel.app'] // Whitelist the domains you want to allow
+};
+
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(mongoSanitize());
 app.use(xss());

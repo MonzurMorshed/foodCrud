@@ -17,7 +17,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 // Security Middleware Implement
-
 const corsOptions = {
     credentials: true,
     origin: ['https://food-crud-eight.vercel.app'], // Whitelist the domains you want to allow
@@ -62,12 +61,5 @@ app.use('/api/v1',router);
 //         data:'not found'
 //     })
 // })
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://food-crud-eight.vercel.app');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
-
 
 module.exports = app ;
